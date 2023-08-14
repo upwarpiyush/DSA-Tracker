@@ -4,6 +4,7 @@ import Data from "./data";
 import Landing from "./components/Landing";
 import Header from "./components/Header";
 import Questions from "./components/Questions";
+import Footer from "./components/Footer";
 
 
 
@@ -32,16 +33,17 @@ function App() {
   function appendQuestions(index)
   {
     setQIndex(index);
-    setQuestions(data[qindex].questions);
+    // setQuestions(data[qindex].questions);
     // setI(index);
     // console.log(data[index]);
     // console.log(i);
   }
 
-  // useEffect(()=>{
-  //   const d = JSON.parse(localStorage.getItem("Data"));
-  //   setData(d);
-  // },[update_done_data])
+  useEffect(()=>{
+    // const d = JSON.parse(localStorage.getItem("Data"));
+    setQuestions(data[qindex]?.questions);
+    // console.log(data[qindex]?.questions);
+  },)
 
   const update_done_data = useCallback(
     (updatedData)=>
@@ -62,7 +64,7 @@ function App() {
     const dat = getData();
     setData(data=>(dat));
     // getData();
-  },[updata])
+  },[updata, setQuestions])
 
   return (
     <div>
@@ -72,6 +74,8 @@ function App() {
         <Route path="/" element={<Landing data={data} setData={setData} appendQuestions={appendQuestions}/>}/>
         <Route path="/questions" element={<Questions questions={questions} data={data} qindex={qindex} update_done_data={update_done_data}/>}/>
       </Routes>
+
+      <Footer/>
       {/* <Landing data={data} setData={setData}></Landing> */}
     </div>
     
